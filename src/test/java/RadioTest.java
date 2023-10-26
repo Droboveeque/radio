@@ -16,10 +16,34 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldSetStationWithModSize() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(15);
+
+        int expected = 15;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSetStationAboveMax() {
         Radio radio = new Radio();
 
         radio.setCurrentStation(10);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetStationAboveMaxWithModSize() {
+        Radio radio = new Radio(60);
+
+        radio.setCurrentStation(60);
 
         int expected = 0;
         int actual = radio.getCurrentStation();
@@ -53,6 +77,19 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldSetNextStationWhenCurrentIsTheLast() {
+        Radio radio = new Radio(60);
+
+        radio.setCurrentStation(59);
+        radio.next();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSetNextStation() {
         Radio radio = new Radio();
 
@@ -60,6 +97,19 @@ public class RadioTest {
         radio.next();
 
         int expected = 8;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextStationWithModSize() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentStation(16);
+        radio.next();
+
+        int expected = 17;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -79,6 +129,19 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldSetPrevStationWhenCurrentIsTheFirst() {
+        Radio radio = new Radio(40);
+
+        radio.setCurrentStation(0);
+        radio.prev();
+
+        int expected = 39;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSetPrevStation() {
         Radio radio = new Radio();
 
@@ -86,6 +149,19 @@ public class RadioTest {
         radio.prev();
 
         int expected = 6;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetPrevStationWithModSize() {
+        Radio radio = new Radio(40);
+
+        radio.setCurrentStation(30);
+        radio.prev();
+
+        int expected = 29;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
